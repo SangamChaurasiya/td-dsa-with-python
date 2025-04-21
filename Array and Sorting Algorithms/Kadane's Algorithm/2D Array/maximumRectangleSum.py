@@ -33,11 +33,17 @@ for i in range(m):
         temp.append(matrix[j][i])
 
     ans = max(ans, kadaneAlgorithm(temp))
+    # print(temp)
+    # print(ans)
 
     for j in range(i+1, m):
         for k in range(n):
             temp[k] += matrix[k][j]
 
         ans = max(ans, kadaneAlgorithm(temp))
+        # print(temp)
+        # print(ans)
+
+    print('--------------------------')
 
 print(ans)
