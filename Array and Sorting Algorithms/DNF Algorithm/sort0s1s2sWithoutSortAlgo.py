@@ -7,13 +7,13 @@ def dnfAlgorithm(givenNums):
     
     while mid < high:
         if givenNums[mid] == 0:
-            givenNums[low], givenNums[mid] = givenNums[mid], givenNums[low]
+            givenNums[low], givenNums[mid] = givenNums[mid], givenNums[low] # swapping low and mid element when mid element is 0
             low += 1
             mid += 1
-        elif givenNums[mid] == 1:
+        elif givenNums[mid] == 1: # moving mid pointer when mid element is 1
             mid += 1
         else:
-            givenNums[mid], givenNums[high] = givenNums[high], givenNums[mid]
+            givenNums[mid], givenNums[high] = givenNums[high], givenNums[mid] # swapping mid and high element when mid element is 2
             high -= 1
     return givenNums
 
