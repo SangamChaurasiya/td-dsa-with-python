@@ -24,6 +24,8 @@ class LinkedList:
         while temp != None:
             print(temp.val, end="->") # printing the values
             temp = temp.next # moving to the next node
+
+        print()
         
     # Inserting new Node at the end
     def insertionAtTail(self, value):
@@ -64,6 +66,81 @@ class LinkedList:
         temp.next = Node(value) # storing new node to the kth position
         temp.next.next = rest # assigning new node next to the rest of the nodes
 
+    def deleteAtHead(self):
+        if self.head is None:
+            print("List is empty.")
+            return
+        self.head = self.head.next
+
+    def deleteAtTail(self):
+        if self.head is None:
+            print("List is empty.")
+            return
+
+        if self.head.next is None:
+            self.head = None
+            return
+
+        temp = self.head
+        while temp.next.next:
+            temp = temp.next
+
+        temp.next = None
+
+    def deletion(self, k):
+        if k < 0:
+            print("Invalid position.")
+            return
+
+        if self.head is None:
+            print("List is empty.")
+            return
+
+        if k == 0:
+            self.deleteAtHead()
+            return
+
+        temp = self.head
+        count = 0
+
+        while temp is not None and count < k - 1:
+            temp = temp.next
+            count += 1
+
+        if temp is None or temp.next is None:
+            print("Position out of range.")
+            return
+
+        temp.next = temp.next.next   
+
+    # # Method 1: Using two LL 
+    # newHead = None
+    # def reverse(self, curr):
+    #     if curr.next == None:
+    #         self.newHead = Node(curr.val)
+    #         self.head = self.newHead
+    #         return
+        
+    #     self.reverse(curr.next)
+
+    #     temp = self.newHead
+    #     while temp.next != None:
+    #         temp = temp.next
+
+    #     temp.next = Node(curr.val)
+
+    # Method 2: Using single LL
+    def reverse(self):
+        prev = None
+        curr = self.head
+
+        while curr != None:
+            nextNode = curr.next # pointing to the next node
+            curr.next = prev # assigning next node to the prev
+            prev = curr # assigning prev to curr
+            curr = nextNode
+
+        self.head = prev
 
 linkedList = LinkedList()
 
@@ -71,5 +148,15 @@ linkedList.insertionAtTail(1)
 linkedList.insertionAtTail(2)
 linkedList.insertionAtTail(3)
 linkedList.insertionAtHead(0)
-linkedList.insertion(-1, 5)
+
+# LL before reverse
+linkedList.printLinkedList()
+
+# # Method 1: Calling reverse() using 2 LLs
+# linkedList.reverse(linkedList.head)
+
+# method 2: Calling rverse() using single LL
+linkedList.reverse()
+
+# LL after reverse
 linkedList.printLinkedList()
